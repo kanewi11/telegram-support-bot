@@ -1,0 +1,277 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #1a1a1a;
+}
+
+#root {
+    margin: 0 auto;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.app {
+    display: flex;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    width: 100%;
+  }
+  
+  .chat-app {
+    display: flex;
+    width: 100%;
+  }
+  
+  .left-panel {
+    width: 30%;
+    background-color: #242424;
+    overflow-y: auto;
+  }
+  
+  .right-panel {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #141414;
+    position: relative;
+  }
+  
+  .placeholder {
+    font-size: 1.2em;
+    color: #888;
+  }
+
+  .chat-list h3 {
+    margin: 20px 10px;
+    text-align: center;
+  }
+
+  .chat-list input {
+    width: 100%;
+    padding: 15px 10px;
+    background: #141414;
+    border: none;
+    border-bottom: 1px solid #707070;
+  }
+
+  .chat-list .chats {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .chat-list .chat {
+    padding: 10px;
+    border-bottom: 1px solid #707070;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .chat-list .chat p {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  .chat-list .telegram_id {
+    font-weight: bold;
+  }
+
+  .chat-list .last_message {
+    font-weight: lighter;
+  }
+  
+  .chat-list .chat:hover {
+    background-color: #181818;
+  }
+
+  .chat-list .unread {
+    animation-name: blink;
+    animation-timing-function: linear;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+  }
+
+  .chat-list .chats .active {
+    background-color: #4b4b4b !important;
+  }
+
+  @keyframes blink {
+    50% {
+      background-color: rgb(82, 82, 82);
+    }
+  }
+  
+  .chat-window {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #141414;
+  }
+
+  .messages p {
+    word-break: break-all;
+    white-space: pre-line;
+  }
+
+  .messages div {
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  .messages .admin {
+    text-align: left;
+    margin-bottom: 10px;
+    background-color: #05828e;
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: max-content;
+    margin-left: auto;
+  }
+  
+  .messages .user {
+    text-align: left;
+    margin-bottom: 10px;
+    background: #184663;
+    padding: 10px 20px;
+    border-radius: 10px;
+    width: max-content;
+    margin-right: auto;
+  }
+  
+  .message-input {
+    display: flex;
+    padding: 10px;
+    background-color: #141414;
+    border-top: 1px solid #707070;
+  }
+  
+  .message-input textarea[type="textarea"] {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #707070;
+    border-radius: 4px;
+    resize: none;
+    max-height: 200px;
+    outline: none;
+  }
+  
+  .message-input input[type="file"] {
+    display: none;
+  }
+
+  input[type="file"]::file-selector-button {
+        display: none;
+    }
+  
+  .custom-file-upload {
+    height: 25px;
+    width: 25px;
+    margin: 10px;
+  }
+
+  .file-upload-label {
+    cursor: pointer;
+    display: flex;
+    margin: 0 10px;
+    border-radius: 10px;
+  }
+
+  .file-upload-label:hover {
+    background-color: #343434;
+    transition: background-color 0.3s;
+  }
+
+  .message-action-container {
+    margin-top: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .message-input button {
+    background-color: #4b4b4b;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    height: fit-content;
+    margin-top: auto;
+    padding: 0;
+  }
+
+  .message-input button img {
+    height: 30px;
+    width: 30px;
+    margin: 17px 17px 15px 15px;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .message-input button:hover {
+    background-color: #343434;
+  }
+
+  .file-list {
+    max-width: 100% !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    background-color: #707070;
+    border-bottom: none;
+    max-height: 400px;
+  }
+
+  .file {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    max-width: 100% !important;
+  }
+
+  .file p {
+    word-wrap: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .remove-file {
+    cursor: pointer;
+  }
+
+  .remove-file img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .file-list div{
+    padding: 5px 10px;
+  }
+  

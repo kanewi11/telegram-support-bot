@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16.4-alpine3.19
+    restart: always
+    env_file:
+      - .envs/.env
+    networks:
+      - local
+    volumes:
+      - ./docker/postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD", "pg_isready",  "-d",  "$POSTGRES_DB",  "-U", "$POSTGRES_USER" ]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+
+networks:
+  local:
+    driver: bridge
