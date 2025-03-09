@@ -6,7 +6,7 @@ authors = ["kanewi11"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.11"
 aiogram = "^3.17.0"
 httpx = "^0.28.1"
 pydantic = "^2.10.5"
