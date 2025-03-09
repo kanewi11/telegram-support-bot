@@ -1,11 +1,14 @@
+import imghdr
 from pathlib import Path
 from uuid import uuid4
+from tempfile import NamedTemporaryFile
 
 from fastapi import UploadFile, Depends
 from fastapi.responses import FileResponse
 
 from src.core.factories import get_attachment_service
 from src.shared.utils.routers import router_factory
+from src.shared.utils.image import is_image
 from src.schemas.attachment import AttachmentIn, AttachmentOut
 from src.services.attachment import AttachmentService
 from src.core.config import SETTINGS
@@ -23,23 +26,22 @@ async def upload_file(
     file: UploadFile,
     service: AttachmentService = Depends(get_attachment_service),
 ) -> AttachmentOut:
-    if file.filename:
-        file_prefix = file.filename.split('.')
-        if len(file_prefix) > 1:
-            file_prefix = f".{file_prefix[-1]}"
+    with NamedTemporaryFile(delete=False) as temp_file:
+        temp_file.write(await file.read())
+        temp_file_path = temp_file.name  # Путь к временному файлу
+
+    if is_image(temp_file_path):
+        file_field = "photo"
     else:
-        file_prefix = ""
-    file.filename = f"{uuid4().hex}{file_prefix}"
-    file_path = SETTINGS.uploads_dir.joinpath(file.filename)
-    with open(file_path, "wb") as uploaded_file:
-        uploaded_file.write(file.file.read())
-    attachment = await service.add_attachment(
-        AttachmentIn(
-            filename=file.filename,
-            content_type=file.content_type or "text/html"
+        file_field = "document"
+    with open(temp_file_path, "rb") as f:
+        response = httpx.post(
+            url, 
+            data={"chat_id": CHAT_ID}, 
+            files={file_field: f}
         )
-    )
-    return attachment
+        return response.json()  # Возвращаем ответ Telegram API
+    os.remove(temp_file_path)
 
 
 @router.get(

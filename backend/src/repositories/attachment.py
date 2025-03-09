@@ -10,6 +10,9 @@ from src.repositories.base import BaseCRUDRepository
 class AttachmentRepository(BaseCRUDRepository[Attachment]):
     def __init__(self, model: Type[Attachment] = Attachment) -> None:
         super().__init__(model=model)
+        
+    async def upload_attachment(self):
+        ...
     
     async def get_attachment_by_id(
         self, 

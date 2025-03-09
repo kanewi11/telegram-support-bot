@@ -6,7 +6,7 @@ authors = ["kanewi11"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.11"
 sqlalchemy = "^2.0.36"
 aiogram = "^3.16.0"
 pydantic-settings = "^2.7.0"
@@ -17,6 +17,7 @@ fastapi = "^0.115.6"
 websockets = "^14.1"
 uvicorn = "^0.34.0"
 python-multipart = "^0.0.20"
+httpx = "^0.28.1"
 
 
 [build-system]

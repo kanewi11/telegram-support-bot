@@ -5,13 +5,21 @@ from pydantic import BaseModel
 
 
 class AttachmentIn(BaseModel):
-    filename: str
-    content_type: str
+    file_id: str
+    mime_type: str
 
 
 class AttachmentOut(BaseModel):
     id: UUID
-    filename: str
-    content_type: str
+    file_id: str
+    mime_type: str
     created_at: datetime
     updated_at: datetime
+
+
+class UploadAttachmentIn(BaseModel):
+    ...
+
+
+class UploadAttachmentOut(BaseModel):
+    ...
